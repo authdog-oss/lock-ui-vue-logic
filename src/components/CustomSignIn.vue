@@ -1,17 +1,17 @@
 <template>
-  <button v-on:click='displayLock'>Custom SignIn</button>
+  <button v-on:click='activateSignin'>Custom Sign In</button>
 </template>
 
 <script>
-  import {
-    displayLock,
-    // getEndpoints
-  } from '@authdog/lock-core'
-
+  import { displayLock } from '@authdog/lock-core'
+  import { store } from '../store'
   export default {
     name: 'CustomSignIn',
     methods: {
-      displayLock
+      activateSignin: () => {
+        const details = store.state.authdogDetails
+        displayLock(details.env, details.appId, details.version)
+      }
     }
   }
 </script>

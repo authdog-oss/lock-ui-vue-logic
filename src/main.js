@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import Lock from './Lock.vue'
+import { Example } from '.'
 
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(Lock),
+  render: h => h(Example),
 }).$mount('#app')

@@ -1,12 +1,13 @@
-import { default as AuthdogLock } from './components/AuthdogLock.vue'
+import { default as SignIn } from './components/SignIn.vue'
 import { default as LoadingLock } from './components/LoadingLock.vue'
 
 export const store = {
   state: {
     selectedComponent: LoadingLock,
-    signInComponent: AuthdogLock,
+    signInComponent: SignIn,
     loadingComponent: LoadingLock,
-    unauthorizedComponent: LoadingLock
+    unauthorizedComponent: LoadingLock,
+    authdogDetails: null
   },
   setLockVisible(component) {
     if (component) {
@@ -25,5 +26,8 @@ export const store = {
       this.state.unauthorizedComponent = component
     }
     this.state.selectedComponent = this.state.unauthorizedComponent
+  },
+  setAuthdogAppId({ env, appId, version }) {
+    this.state.authdogDetails = { env, appId, version }
   }
 }
