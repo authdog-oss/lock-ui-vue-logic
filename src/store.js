@@ -1,17 +1,29 @@
 import { default as AuthdogLock } from './components/AuthdogLock.vue'
 import { default as LoadingLock } from './components/LoadingLock.vue'
 
-// eslint-disable-next-line
-console.log(AuthdogLock)
-
 export const store = {
   state: {
-    numbers: [1, 2, 3],
-    selectedComponent: LoadingLock
+    selectedComponent: LoadingLock,
+    signInComponent: AuthdogLock,
+    loadingComponent: LoadingLock,
+    unauthorizedComponent: LoadingLock
   },
-  addNumber(newNumber) {
-    // eslint-disable-next-line
-    this.state.numbers.push(newNumber)
-    this.state.selectedComponent = AuthdogLock
+  setLockVisible(component) {
+    if (component) {
+      this.state.signInComponent = component
+    }
+    this.state.selectedComponent = this.state.signInComponent
+  },
+  setLoading(component) {
+    if (component) {
+      this.state.loadingComponent = component
+    }
+    this.state.selectedComponent = this.state.loadingComponent
+  },
+  setUnauthorized(component) {
+    if (component) {
+      this.state.unauthorizedComponent = component
+    }
+    this.state.selectedComponent = this.state.unauthorizedComponent
   }
 }
