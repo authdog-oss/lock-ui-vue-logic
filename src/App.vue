@@ -1,28 +1,37 @@
+/* eslint-disable */
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id='app'>
+    <AuthdogLock
+      :is='DynamicComponent'
+    />
+    <h2>{{ storeState.numbers }}</h2>
+    <button v-on:click='addNumber'>Add</button>
+    <div :is='storeState.selectedComponent' />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AuthdogLock from './components/AuthdogLock.vue'
+import LoadingLock from './components/LoadingLock.vue'
+import { store } from './store.js'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    AuthdogLock,
+    // eslint-disable-next-line
+    LoadingLock
+  },
+  data() {
+    return {
+      DynamicComponent: store.state.numbers.length === 3 ? LoadingLock : AuthdogLock,
+      storeState: store.state
+    }
+  },
+  methods: {
+    addNumber: () => {
+      store.addNumber(23)
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
